@@ -1,7 +1,10 @@
  package org.formation.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
 
 
 @Entity
@@ -14,6 +17,11 @@ public class Client extends Personne  {
 	@Embedded
 	private Adresse adresse;
 	
+	
+	
+	@OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+    private Compte compte;
 
 	public Client() {}
 
@@ -22,26 +30,26 @@ public class Client extends Personne  {
 	}
 	
 
-	public Client(String nom, String prenom, String login, String motDePasse, Adresse adresse) {
-		super(nom,prenom);
-		this.login = login;
-		this.motDePasse = motDePasse;
-		this.adresse = adresse;
-	}
 
-	public String toString() {
-		 return " ID  : "+this.getId() +" - "+
-		    	" Nom : "+this.getNom()+" - "+
-		    	" Prénom : "+this.getPrenom() +" - "+
-		    	" login : "+this.getLogin() +" - "+
-		    	" Mot de passe : "+this.getMotDePasse() +" - "/*+
-		    	" Adresse : "+this.getAdresse().toString()*/;
-		    		
-		
-	}
 
 
 	
+	public Compte getCompte() {
+		return compte;
+	}
+
+	public void setCompte(Compte compte) {
+		this.compte = compte;
+	}
+
+	public Client(String login, String motDePasse, Adresse adresse, Compte compte) {
+		super();
+		this.login = login;
+		this.motDePasse = motDePasse;
+		this.adresse = adresse;
+		this.compte = compte;
+	}
+
 	public String getLogin() {
 		return login;
 	}
@@ -64,6 +72,12 @@ public class Client extends Personne  {
 
 	public void setAdresse(Adresse adresse) {
 		this.adresse = adresse;
+	}
+
+	@Override
+	public String toString() {
+		return "Client [login=" + login + ", motDePasse=" + motDePasse + ", adresse=" + adresse + ", compte=" + compte
+				+ "]";
 	}
 	
 

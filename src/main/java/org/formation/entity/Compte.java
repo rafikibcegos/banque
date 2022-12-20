@@ -29,12 +29,25 @@ public class Compte {
  private int numeroCompte;
 
 
-
+ @OneToOne(mappedBy = "compte")
+ private Client client;
 
 private Date dateOuverture;
 private float solde;
 
 
+
+
+
+public Client getClient() {
+	return client;
+}
+
+
+
+public void setClient(Client client) {
+	this.client = client;
+}
 
 
 
@@ -93,12 +106,11 @@ public void setSolde(float solde) {
 
 
 
-
-
-public Compte(Long id, int numeroCompte, Date dateOuverture, float solde) {
+public Compte(Long id, int numeroCompte, Client client, Date dateOuverture, float solde) {
 	super();
 	this.id = id;
 	this.numeroCompte = numeroCompte;
+	this.client = client;
 	this.dateOuverture = dateOuverture;
 	this.solde = solde;
 }
@@ -107,9 +119,13 @@ public Compte(Long id, int numeroCompte, Date dateOuverture, float solde) {
 
 @Override
 public String toString() {
-	return "Compte [id=" + id + ", numeroCompte=" + numeroCompte + ", dateOuverture=" + dateOuverture + ", solde="
-			+ solde + "]";
+	return "Compte [id=" + id + ", numeroCompte=" + numeroCompte + ", client=" + client + ", dateOuverture="
+			+ dateOuverture + ", solde=" + solde + "]";
 }
+
+
+
+
 
 
 

@@ -5,6 +5,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import jakarta.persistence.Table;
 
 
@@ -21,8 +22,8 @@ public class Client extends Personne  {
 	
 	
 	
-	@OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "compte_id", referencedColumnName = "id")
+	@OneToOne(mappedBy = "client", cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Compte compte;
 
 	public Client() {}

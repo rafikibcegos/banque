@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
+import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -22,8 +24,7 @@ import jakarta.persistence.Table;
 public class Compte {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
+	@Column(name = "client_id")
 	private Long id;
 	
 	
@@ -32,7 +33,9 @@ public class Compte {
  private int numeroCompte;
 
 
- @OneToOne(mappedBy = "compte")
+ @OneToOne
+ @MapsId
+ @JoinColumn(name = "client_id")
  private Client client;
 
 private Date dateOuverture;
